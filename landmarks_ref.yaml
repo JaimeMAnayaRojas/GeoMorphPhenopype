@@ -1,0 +1,33 @@
+# Landmarking with reference detection
+# ------------------------------------
+# Set landmarks, e.g. for geometric morphometrics, and draw them. 
+# Can be multiple sets, i.e. use multiple "set_landmarks" statements 
+# if you want to quantify morphometrics of different specimens, traits or 
+# objects in the same image. Specify arguments for "set_" and "draw_" 
+# separately. If a template for a reference card has been created 
+# on the project level, "detect_reference" will attempt to find it in 
+# the current image and measure the current px-ratio.
+
+template_locked: true  # prevents accidental overwrite - removed after loading
+
+processing_steps:
+    - preprocessing:
+        - detect_reference
+    - measurement:
+        - set_landmark:
+            point_size: 5
+            label: true
+            label_size: 2
+            label_width: 2
+    - visualization:
+        - draw_landmark:
+            point_size: 8
+            label: true
+            label_size: 3
+            label_width: 3
+        - draw_reference:
+            label: true
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true

@@ -1,0 +1,63 @@
+# Object detection with masking and reference detection
+# -----------------------------------------------------
+# Uses thresholding for segmentation, with an initial masking step 
+# to remove unwanted areas  ("include: true" to ONLY include specific
+# areas or "include: false" to EXCLUDE specific areas. If a template 
+# for a reference card has been created on the project level, 
+# "detect_reference" will attempt to find it in the current image, 
+# measure the current px-ratio, and exclude it detection. Also contains 
+# optional morphology operations to remove fine structures (see 
+# https://docs.opencv.org/master/db/df6/tutorial_erosion_dilatation.html 
+# for details), as well as an optional contour-editing step (clean up 
+# detected contours and detect again), and default visualization and 
+# export steps. Measure shape and texture features (optional).
+
+config_info:
+    config_name: pype_config_v1.yaml
+    date_created: '2022-11-15 14:28:40'
+    date_last_modified:
+    template_name: detection_mask_ref.yaml
+    template_path: /home/jaime/sciebo/GeoMorphPhenopype/detection_mask_ref.yaml
+processing_steps:
+    - preprocessing:
+        - detect_reference
+        - add_reference
+        - blur:
+            kernel_size: 5
+        - create_mask:
+            tool: rectangle
+            include: true
+        - detect_reference
+    - segmentation:
+        - threshold:
+            method: binary
+            value: 127
+        # - morphology:
+            # operation: open
+            # shape: cross
+            # kernel_size: 5
+            # iterations: 3
+        # - morphology:
+            # operation: close
+            # shape: ellipse
+            # kernel_size: 5
+            # iterations: 3
+        - detect_contour:
+            min_diameter: 0
+            min_area: 0
+        # - edit_contour
+        # - detect_contour:
+            # min_diameter: 0
+            # min_area: 0
+    # - measurement:
+        # - compute_shape_features
+        # - compute_texture_features
+    - visualization:
+        - draw_contour
+        - draw_mask
+        - draw_reference:
+            label: true
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true

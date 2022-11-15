@@ -1,0 +1,12 @@
+image_original:
+    filename: IMG_20221102_093108.jpg
+    width: 3000
+    height: 4000
+    filepath: /home/jaime/sciebo/GeoMorphPhenopype/data/photos/IMG_20221102_093108.jpg
+    filetype: .jpg
+image_phenopype:
+    date_added: '2022-11-15 10:37:34'
+    mode: copy
+    filename: IMG_20221102_093108_copy.jpg
+    width: 3000
+    height: 4000
