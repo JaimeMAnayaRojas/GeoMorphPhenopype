@@ -43,9 +43,9 @@ processing_steps:
         # - detect_contour:
             # min_diameter: 0
             # min_area: 0
-    # - measurement:
-        # - compute_shape_features
-        # - compute_texture_features
+    - measurement:
+        - compute_shape_features
+        - compute_texture_features
     - visualization:
         - draw_contour
         - draw_mask
