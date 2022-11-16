@@ -35,25 +35,25 @@ proj.add_config(template_path=template_path, tag="v1", overwrite=True)
 
 ## modify the "preprocessing" section
 
-target1 = """    - preprocessing:"""
-replacement1 = """    - preprocessing:
-        - add_reference"""
+# target1 = """    - preprocessing:"""
+# replacement1 = """    - preprocessing:
+#         - add_reference"""
 
-proj.edit_config(
-    tag="v1",
-    target=target1,
-    replacement=replacement1
-)
+# proj.edit_config(
+#     tag="v1",
+#     target=target1,
+#     replacement=replacement1
+# )
 
 
-replacement2 = """    - preprocessing:
-        - detect_reference"""
+# replacement2 = """    - preprocessing:
+#         - detect_reference"""
 
-proj.edit_config(
-    tag="v1",
-    target=target1,
-    replacement=replacement2
-)
+# proj.edit_config(
+#     tag="v1",
+#     target=target1,
+#     replacement=replacement2
+# )
 
 
 
