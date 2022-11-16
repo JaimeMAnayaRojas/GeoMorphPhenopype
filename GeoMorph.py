@@ -70,6 +70,7 @@ for path in proj.dir_paths:
 proj.collect_results("v1", "annotations", "annotations")
 
 
+
 ## display results
 import ipyplot ## install with `pip install ipyplot`
 

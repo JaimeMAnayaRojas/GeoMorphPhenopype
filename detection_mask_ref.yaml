@@ -12,25 +12,28 @@
 # detected contours and detect again), and default visualization and 
 # export steps. Measure shape and texture features (optional).
 
-template_locked: true  # prevents accidental overwrite - removed after loading
-
+config_info:
+    config_name: pype_config_v1.yaml
+    date_created: '2022-11-15 16:14:49'
+    date_last_modified: '2022-11-16 09:55:21'
+    template_name: detection_mask_ref.yaml
+    template_path: C:\Users\Kurs\Documents\GeoMorphPhenopype-main\detection_mask_ref.yaml
 processing_steps:
     - preprocessing:
-    	- add_reference:
-    	- detect_reference:
-    	    ANOTATION: {type: reference, id: a, edit: true}
+        - create_reference
         - blur:
             kernel_size: 5
         - create_mask:
-            tool: rectangle
-            include: true 
-        - detect_reference
+            ANNOTATION: {type: mask, id: a, edit: false}
+            tool: polygon
+            include: true        
     - segmentation:
         - threshold:
-            method: binary
+            method: adaptive
             value: 10
             blocksize: 99
             constant: 5
+
         # - morphology:
             # operation: open
             # shape: cross
@@ -42,15 +45,14 @@ processing_steps:
             # kernel_size: 5
             # iterations: 3
         - detect_contour:
+            ANNOTATION: {type: contour, id: a, edit: overwrite}
             min_diameter: 0
             min_area: 0
-        # - edit_contour
-        # - detect_contour:
-            # min_diameter: 0
-            # min_area: 0
     - measurement:
-        - compute_shape_features
-        - compute_texture_features
+        - compute_shape_features:
+            ANNOTATION: {type: shape_features, id: a, edit: overwrite}
+        - compute_texture_features:
+            ANNOTATION: {type: texture_features, id: a, edit: overwrite}
     - visualization:
         - draw_contour
         - draw_mask
@@ -60,3 +62,4 @@ processing_steps:
         - save_canvas
         - save_annotation:
             overwrite: true
+        - export_csv
