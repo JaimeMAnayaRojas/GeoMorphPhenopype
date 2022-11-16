@@ -16,6 +16,9 @@ template_locked: true  # prevents accidental overwrite - removed after loading
 
 processing_steps:
     - preprocessing:
+    	- add_reference:
+    	- detect_reference:
+    	    ANOTATION: {type: reference, id: a, edit: true}
         - blur:
             kernel_size: 5
         - create_mask:
@@ -25,7 +28,9 @@ processing_steps:
     - segmentation:
         - threshold:
             method: binary
-            value: 127
+            value: 10
+            blocksize: 99
+            constant: 5
         # - morphology:
             # operation: open
             # shape: cross
