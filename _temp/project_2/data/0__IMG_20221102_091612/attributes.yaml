@@ -1,0 +1,12 @@
+image_original:
+    filename: IMG_20221102_091612.jpg
+    width: 4000
+    height: 3000
+    filepath: /home/mao/sciebo/GeoMorphPhenopype/data/photos/IMG_20221102_091612.jpg
+    filetype: .jpg
+image_phenopype:
+    date_added: '2022-11-17 18:57:41'
+    mode: copy
+    filename: IMG_20221102_091612_copy.jpg
+    width: 4000
+    height: 3000
